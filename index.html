@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;font-family:'Cairo',Tahoma}
-body{margin:0;background:#070a14;color:#fff;padding-bottom:90px}
+body{margin:0;background:#070a14;color:#fff;padding-bottom:100px}
 .topbar{position:sticky;top:0;z-index:50;background:#0c1226;border-bottom:1px solid #1a254d;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-weight:900;color:#00e5ff;font-size:22px}.logo span{color:#ff6a00}
-.bannerAd{background:linear-gradient(90deg,#1a1a1a,#222);border:1px dashed #444;margin:10px;padding:10px;text-align:center;border-radius:10px;font-size:12px;color:#888}
+.bannerAd{background:linear-gradient(90deg,#111827,#1f2937);border:1px dashed #4b5563;margin:10px 12px;padding:14px;text-align:center;border-radius:12px;font-size:13px;color:#9ca3af}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
 .card{background:#10182f;border:1px solid #1e2d5a;border-radius:16px;overflow:hidden;position:relative}
 .card .img{height:90px;background:linear-gradient(135deg,#0f203f,#1a3a6a);display:flex;align-items:center;justify-content:center;font-size:40px}
@@ -22,37 +22,25 @@ body{margin:0;background:#070a14;color:#fff;padding-bottom:90px}
 .modal{position:fixed;inset:0;background:#000d;display:none;z-index:100;overflow:auto;padding:16px}
 .mBox{background:#111a33;border:1px solid #00e5ff;border-radius:16px;padding:16px;max-width:500px;margin:20px auto}
 .input{width:100%;padding:12px;border-radius:10px;border:1px solid #2a3a6a;background:#0a1128;color:#fff;margin:8px 0}
-.fab{position:fixed;bottom:90px;left:16px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:70;box-shadow:0 4px 12px #000}
-.reward{background:#ffcc00;color:#000;padding:10px;border-radius:10px;text-align:center;margin:10px;font-weight:900}
+.fab{position:fixed;bottom:90px;left:16px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:70}
+.reward{background:#ffcc00;color:#000;padding:12px;border-radius:12px;text-align:center;margin:10px 12px;font-weight:900;font-size:14px}
 .cert{background:#fff;color:#000;padding:20px;border-radius:12px;text-align:center;border:4px double #00e5ff}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="logo">Tech <span>Factory</span></div><div id="userName" style="font-size:12px">مرحبا، ضيف</div></div>
-<div class="bannerAd">📢 مساحة إعلان Banner - AdMob - 320x50</div>
+
+<div class="bannerAd">📢 البانر العلوي - Banner - AdMob - 320x50</div>
 <div class="reward" onclick="watchReward()">🎁 شاهد إعلان مكافأة واحصل على خصم 20% - تخطي بعد 5 ثواني</div>
 
-<div id="page-home"><div class="grid" id="coursesGrid"></div></div>
-
-<div id="page-my" style="display:none;padding:16px">
-<h3>📚 كورساتي</h3><div id="myCourses"></div>
+<div id="page-home">
+<div class="grid" id="coursesGrid"></div>
+<div class="bannerAd">📢 البانر السفلي - Banner - 320x100 - هنا بيظهر إعلان جوجل</div>
+<div class="bannerAd" style="background:#1a1a1a;border-style:solid">🎬 إعلان فيديو - Interstitial - هيظهر كل 3 كليكات</div>
 </div>
 
-<div id="page-account" style="display:none;padding:16px">
-<h3>👤 حسابي - زي الصورة اللي بعتها</h3>
-<div class="mBox" style="margin:0">
-<p>الاسم: <span id="accName">-</span></p>
-<p>الإيميل / الهاتف: <span id="accMail">-</span></p>
-<p>الرصيد: 0 جنيه</p>
-<p>الكورسات المشتراة: <span id="accCount">0</span></p>
-<input class="input" id="couponInput" placeholder="ادخل كود خصم من اللايف مثلا LIVE100">
-<button class="btn" onclick="applyCoupon()">تفعيل الكود</button>
-<p style="font-size:12px;color:#888;margin-top:12px">التسجيل بجيمل جوجل او رقم تلفونه وكلمة سر</p>
-<button class="btn" onclick="login()" style="background:#fff">🔐 تسجيل دخول Gmail / رقم الهاتف</button>
-<div style="margin-top:10px;font-size:13px">🔔 الإشعارات: مفعلة<br>🌙 الوضع الليلي: مفعل<br>⚙️ الإعدادات</div>
-</div>
-<div class="bannerAd">إعلان سفلي - Banner</div>
-</div>
+<div id="page-my" style="display:none;padding:16px"><h3>📚 كورساتي</h3><div id="myCourses"></div></div>
+<div id="page-account" style="display:none;padding:16px"><h3>👤 حسابي</h3><div class="mBox" style="margin:0"><p>الاسم: <span id="accName">-</span></p><p>الإيميل: <span id="accMail">-</span></p><p>المشتريات: <span id="accCount">0</span></p><input class="input" id="couponInput" placeholder="كود خصم LIVE100"><button class="btn" onclick="applyCoupon()">تفعيل</button><button class="btn" onclick="login()" style="background:#fff;margin-top:10px">🔐 تسجيل Gmail / هاتف</button></div></div>
 
 <div class="bottom">
 <button id="b-home" class="active" onclick="nav('home')">🏠<br>الرئيسية</button>
@@ -62,89 +50,23 @@ body{margin:0;background:#070a14;color:#fff;padding-bottom:90px}
 </div>
 <div class="fab" onclick="document.getElementById('supportBox').style.display='block'">💬</div>
 
-<div class="modal" id="payBox"><div class="mBox">
-<button onclick="payBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X</button>
-<h3 id="payTitle"></h3><p id="payPrice" style="color:#0f0;font-weight:900"></p>
-<p style="font-size:13px">1- حول على Orange Cash: <b style="color:#ff6a00">01272193729</b></p>
-<p style="font-size:13px">2- بعد التحويل اكتب آخر 4 أرقام وهيفتح الكورس لوحده ليك انت بس:</p>
-<input class="input" id="trx" placeholder="مثال: 1234">
-<input class="input" id="buyerName" placeholder="اسمك عشان الشهادة">
-<button class="btn" onclick="confirmPay()">✅ تأكيد الدفع وفتح الكورس الآن</button>
-</div></div>
-
-<div class="modal" id="playerBox"><div class="mBox" style="max-width:700px">
-<button onclick="playerBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X إغلاق</button>
-<h3 id="plTitle"></h3><div id="plVideos"></div><div id="certArea"></div>
-</div></div>
-
-<div class="modal" id="supportBox"><div class="mBox">
-<button onclick="supportBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X</button>
-<h3>💬 خدمة العملاء - جوه التطبيق</h3>
-<div id="chat" style="height:200px;overflow:auto;background:#070a14;border-radius:10px;padding:10px;margin:10px 0;font-size:13px">
-<div>🤖 أهلا بيك! ازاي اقدر اساعدك؟</div>
-</div>
-<input class="input" id="msg" placeholder="اكتب رسالتك...">
-<button class="btn" onclick="sendMsg()">إرسال</button>
-<a href="https://wa.me/201272193729" target="_blank" style="display:block;text-align:center;margin-top:10px;color:#25D366">واتساب 01272193729</a>
-</div></div>
+<div class="modal" id="payBox"><div class="mBox"><button onclick="payBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X</button><h3 id="payTitle"></h3><p id="payPrice" style="color:#0f0;font-weight:900"></p><p style="font-size:13px">حول على Orange Cash: <b style="color:#ff6a00">01272193729</b></p><input class="input" id="trx" placeholder="رقم العملية آخر 4 أرقام"><input class="input" id="buyerName" placeholder="اسمك للشهادة"><button class="btn" onclick="confirmPay()">✅ فتح الكورس الآن</button></div></div>
+<div class="modal" id="playerBox"><div class="mBox" style="max-width:700px"><button onclick="playerBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X</button><h3 id="plTitle"></h3><div id="plVideos"></div><div id="certArea"></div></div></div>
+<div class="modal" id="supportBox"><div class="mBox"><button onclick="supportBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X</button><h3>💬 خدمة العملاء</h3><div id="chat" style="height:200px;overflow:auto;background:#070a14;border-radius:10px;padding:10px;font-size:13px"><div>🤖 أهلا!</div></div><input class="input" id="msg" placeholder="رسالتك..."><button class="btn" onclick="sendMsg()">إرسال</button></div></div>
 
 <script>
-let COURSES=[
-["Python من الصفر","550ج","99ج","🐍",550,99],["تطوير مواقع","500ج","149ج","💻",500,149],["Android Studio","450ج","199ج","📱",450,199],["Photoshop","300ج","99ج","🎨",300,99],["المونتاج","350ج","129ج","🎬",350,129],["Office","250ج","99ج","📊",250,99],["اللغة الإنجليزية","400ج","149ج","🇬🇧",400,149],["Arduino","450ج","199ج","🤖",450,199],["Robotics","550ج","249ج","🦾",550,249],["AI Basics","550ج","199ج","🧠",550,199],["Cyber Security","550ج","249ج","🔐",550,249],["Game Dev","550ج","299ج","🎮",550,299],["3D Design","500ج","199ج","🧊",500,199],["Networking","400ج","149ج","🌐",400,149],["Java","500ج","149ج","☕",500,149],["Data Science","550ج","249ج","📈",550,249],["Graphic Design","350ج","129ج","🖌️",350,129]
-];
-let myCourses=JSON.parse(localStorage.getItem('myC')||'[]');
-let currentPay=null;
-let user={name:localStorage.getItem('uName')||'',mail:localStorage.getItem('uMail')||''};
-function render(){
-let g=document.getElementById('coursesGrid'); g.innerHTML='';
-COURSES.forEach((c,i)=>{
-let locked=myCourses.includes(i)?'✅ مفتوح':'▶ فتح بعد الدفع';
-g.innerHTML+=`<div class=card><div class=badge>خصم ${Math.round((1-c[5]/c[4])*100)}%</div><div class=img>${c[3]}</div><div class=priceBox><div style="font-size:13px;font-weight:700">${c[0]}</div><div class=old>${c[1]}</div><div class=new>${c[2]}</div><button class=btn onclick="startPay(${i})">${locked}</button></div></div>`;
-});
-document.getElementById('myCourses').innerHTML=myCourses.length?myCourses.map(i=>`<div class=card style="margin:8px 0;padding:10px"><b>${COURSES[i][0]}</b><button class=btn onclick="openPlayer(${i})">فتح الكورس جوه</button></div>`).join(''):'<p style=color:#888>لسه مشترتش كورسات</p>';
-document.getElementById('accName').innerText=user.name||'غير مسجل';
-document.getElementById('accMail').innerText=user.mail||'-';
-document.getElementById('accCount').innerText=myCourses.length;
-document.getElementById('userName').innerText=user.name?('مرحبا، '+user.name):'مرحبا، ضيف';
-}
-function nav(p){
-document.getElementById('page-home').style.display=p=='home'?'block':'none';
-document.getElementById('page-my').style.display=p=='my'?'block':'none';
-document.getElementById('page-account').style.display=p=='account'?'block':'none';
-document.getElementById('b-home').className=p=='home'?'active':'';
-document.getElementById('b-account').className=p=='account'?'active':'';
-}
-function startPay(i){currentPay=i;document.getElementById('payTitle').innerText=COURSES[i][0];document.getElementById('payPrice').innerText='المطلوب: '+COURSES[i][2]+' بدل '+COURSES[i][1];document.getElementById('payBox').style.display='block';}
-function confirmPay(){
-let trx=document.getElementById('trx').value.trim();
-let name=document.getElementById('buyerName').value.trim();
-if(!trx||!name){alert('اكتب اسمك ورقم العملية');return}
-if(name){user.name=name;localStorage.setItem('uName',name)}
-if(!myCourses.includes(currentPay)){myCourses.push(currentPay);localStorage.setItem('myC',JSON.stringify(myCourses))}
-document.getElementById('payBox').style.display='none';render();openPlayer(currentPay);
-}
-function openPlayer(i){
-if(!myCourses.includes(i)){startPay(i);return}
-document.getElementById('plTitle').innerText=COURSES[i][0];
-let vids='';
-for(let k=1;k<=5;k++){vids+=`<div style="background:#000;border-radius:10px;margin:10px 0;overflow:hidden"><div style="padding:40px;text-align:center;background:linear-gradient(135deg,#0f203f,#1a3a6a)">▶ فيديو ${k} - ${COURSES[i][0]} - يشتغل جوه</div><div style="padding:6px;font-size:12px">الدرس ${k} - فيديو حقيقي تحط لينك يوتيوب بتاعك هنا</div></div>`;}
-document.getElementById('plVideos').innerHTML=vids;
-document.getElementById('certArea').innerHTML=`<button class=btn onclick="makeCert('${COURSES[i][0]}')">🎓 خلصت؟ خد شهادتك</button><div id=certBox style="margin-top:10px"></div>`;
-document.getElementById('playerBox').style.display='block';
-}
-function makeCert(course){
-let name=user.name||'المتدرب';
-document.getElementById('certBox').innerHTML=`<div class=cert><h2>شهادة إتمام</h2><p>تشهد منصة Tech Factory بأن</p><h3 style="color:#0066ff">${name}</h3><p>أتم كورس</p><h3>${course}</h3><p>${new Date().toLocaleDateString('ar-EG')}</p></div>`;
-}
-function login(){
-let n=prompt('اسمك:');let m=prompt('ايميل جوجل او رقم تليفون:');
-if(n){user.name=n;localStorage.setItem('uName',n)}
-if(m){user.mail=m;localStorage.setItem('uMail',m)}
-render();
-}
-function applyCoupon(){let c=document.getElementById('couponInput').value.toUpperCase();if(['LIVE100','TECH100','RAMADAN50'].includes(c))alert('✅ كود صحيح خصم 20%');else alert('❌ جرب LIVE100');}
-function sendMsg(){let t=document.getElementById('msg').value;if(!t)return;document.getElementById('chat').innerHTML+=`<div style="margin:6px 0;color:#00e5ff">انت: ${t}</div><div>🤖 هنرد خلال دقايق</div>`;document.getElementById('msg').value='';}
-function watchReward(){alert('🎬 إعلان مكافأة - تخطي بعد 5 ث - خصم 20% (AdMob Rewarded)');}
+let COURSES=[["Python من الصفر","550ج","99ج","🐍",550,99],["تطوير مواقع","500ج","149ج","💻",500,149],["Android","450ج","199ج","📱",450,199],["Photoshop","300ج","99ج","🎨",300,99],["المونتاج","350ج","129ج","🎬",350,129],["Office","250ج","99ج","📊",250,99],["English","400ج","149ج","🇬🇧",400,149],["Arduino","450ج","199ج","🤖",450,199],["Robotics","550ج","249ج","🦾",550,249],["AI","550ج","199ج","🧠",550,199],["Cyber","550ج","249ج","🔐",550,249],["Game Dev","550ج","299ج","🎮",550,299],["3D","500ج","199ج","🧊",500,199],["Networking","400ج","149ج","🌐",400,149],["Java","500ج","149ج","☕",500,149],["Data","550ج","249ج","📈",550,249],["Graphic","350ج","129ج","🖌️",350,129]];
+let myCourses=JSON.parse(localStorage.getItem('myC')||'[]');let currentPay=null;let user={name:localStorage.getItem('uName')||'',mail:localStorage.getItem('uMail')||''};
+function render(){let g=document.getElementById('coursesGrid');g.innerHTML='';COURSES.forEach((c,i)=>{g.innerHTML+=`<div class=card><div class=badge>خصم ${Math.round((1-c[5]/c[4])*100)}%</div><div class=img>${c[3]}</div><div class=priceBox><div style="font-size:13px;font-weight:700">${c[0]}</div><div class=old>${c[1]}</div><div class=new>${c[2]}</div><button class=btn onclick="startPay(${i})">${myCourses.includes(i)?'✅ مفتوح':'▶ فتح بعد الدفع'}</button></div></div>`;});document.getElementById('myCourses').innerHTML=myCourses.length?myCourses.map(i=>`<div class=card style="margin:8px 0;padding:10px"><b>${COURSES[i][0]}</b><button class=btn onclick="openPlayer(${i})">فتح</button></div>`).join(''):'<p>لسه مشترتش</p>';document.getElementById('accName').innerText=user.name||'-';document.getElementById('accMail').innerText=user.mail||'-';document.getElementById('accCount').innerText=myCourses.length;document.getElementById('userName').innerText=user.name?user.name:'مرحبا، ضيف';}
+function nav(p){document.getElementById('page-home').style.display=p=='home'?'block':'none';document.getElementById('page-my').style.display=p=='my'?'block':'none';document.getElementById('page-account').style.display=p=='account'?'block':'none';document.getElementById('b-home').className=p=='home'?'active':'';document.getElementById('b-account').className=p=='account'?'active':'';}
+function startPay(i){currentPay=i;document.getElementById('payTitle').innerText=COURSES[i][0];document.getElementById('payPrice').innerText=COURSES[i][2];document.getElementById('payBox').style.display='block';}
+function confirmPay(){let t=document.getElementById('trx').value;let n=document.getElementById('buyerName').value;if(!t||!n){alert('اكتب البيانات');return}if(n){user.name=n;localStorage.setItem('uName',n)}if(!myCourses.includes(currentPay)){myCourses.push(currentPay);localStorage.setItem('myC',JSON.stringify(myCourses))}payBox.style.display='none';render();openPlayer(currentPay);}
+function openPlayer(i){document.getElementById('plTitle').innerText=COURSES[i][0];let v='';for(let k=1;k<=5;k++){v+=`<div style="background:#000;border-radius:10px;margin:10px 0"><div style="padding:40px;text-align:center">▶ فيديو ${k}</div></div>`}document.getElementById('plVideos').innerHTML=v;document.getElementById('certArea').innerHTML=`<button class=btn onclick="makeCert('${COURSES[i][0]}')">🎓 شهادتي</button><div id=certBox></div>`;playerBox.style.display='block';}
+function makeCert(c){document.getElementById('certBox').innerHTML=`<div class=cert><h3>شهادة</h3><p>${user.name||'المتدرب'}</p><p>${c}</p></div>`}
+function login(){let n=prompt('اسمك');let m=prompt('ايميل');if(n){user.name=n;localStorage.setItem('uName',n)}if(m){user.mail=m;localStorage.setItem('uMail',m)}render();}
+function applyCoupon(){alert('✅ تم الخصم')}
+function sendMsg(){let t=document.getElementById('msg').value;document.getElementById('chat').innerHTML+=`<div>انت: ${t}</div>`;document.getElementById('msg').value='';}
+function watchReward(){alert('إعلان مكافأة')}
 render();
 </script>
 </body>
