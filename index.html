@@ -2,71 +2,81 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tech Factory</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:'Cairo'}
-body{margin:0;background:#070a14;color:#fff;padding-bottom:90px}
-.topbar{position:sticky;top:0;z-index:40;background:#0c1226;padding:12px 16px;display:flex;justify-content:space-between}
-.logo{font-weight:900;color:#00e5ff;font-size:22px}.logo span{color:#ff6a00}
-.bannerAd{background:#111827;border:1px dashed #444;margin:10px 12px;padding:12px;text-align:center;border-radius:10px;color:#888;font-size:13px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
-.card{background:#10182f;border:1px solid #1e2d5a;border-radius:16px;overflow:hidden;position:relative}
-.badge{position:absolute;top:8px;left:8px;background:#ff0033;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:900}
-.priceBox{padding:8px}.old{text-decoration:line-through;color:#777;font-size:12px}.new{color:#00ff88;font-weight:900;font-size:18px}
-.btn{width:100%;background:linear-gradient(90deg,#00e5ff,#0066ff);border:0;padding:10px;border-radius:10px;font-weight:900}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#0a1128;border-top:1px solid #1e2d5a;display:flex;justify-content:space-around;padding:8px 0;z-index:50}
-.bottom button{background:none;border:0;color:#7a8ab5;font-size:12px}.bottom button.active{color:#00e5ff}
-/* إعلان أول ما يفتح */
-#appOpenAd{position:fixed;inset:0;background:#000;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-#appOpenAd .adBox{background:#fff;color:#000;width:100%;max-width:400px;border-radius:16px;padding:20px}
-#skipBtn{background:#111;color:#fff;border:0;padding:8px 16px;border-radius:20px;margin-top:15px;display:none}
-.modal{position:fixed;inset:0;background:#000d;display:none;z-index:100;padding:16px}
-.mBox{background:#111a33;border:1px solid #00e5ff;border-radius:16px;padding:16px;max-width:500px;margin:20px auto}
-.input{width:100%;padding:12px;border-radius:10px;border:1px solid #2a3a6a;background:#0a1128;color:#fff;margin:8px 0}
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{margin:0;background:#070a14;color:#fff}
+.topbar{position:sticky;top:0;z-index:99;background:#0b1020;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e293b}
+.logo{font-weight:900;color:#00e5f1;font-size:22px}
+.bannerAd{background:#111827;border:1px dashed #334155;margin:12px;border-radius:12px;padding:14px;text-align:center;color:#94a3b8;font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+.card{background:#11102e;border:1px solid #2a2a5a;border-radius:16px;padding:12px;position:relative}
+.emoji{font-size:32px}
+.old{text-decoration:line-through;color:#888;font-size:12px}
+.new{font-weight:900;font-size:18px;color:#00ff88}
+.badge{position:absolute;top:8px;left:8px;background:#ff0040;color:#fff;padding:2px 6px;border-radius:8px;font-size:11px}
+.btn{width:100%;margin-top:8px;background:#7c3aed;color:#fff;border:0;border-radius:10px;padding:10px;font-weight:800}
 </style>
 </head>
 <body>
 
-<!-- إعلان يفتح أول ما التطبيق يفتح -->
-<div id="appOpenAd">
-<div class="adBox">
-<p style="color:#888;font-size:12px">إعلان - AdMob App Open Ad</p>
-<h2 style="color:#000">🔥 أفضل كورس برمجة في مصر</h2>
-<img src="https://via.placeholder.com/300x200/0066ff/ffffff?text=اعلان+AdMob" style="width:100%;border-radius:10px;margin:10px 0">
-<p>ده مكان إعلان جوجل الحقيقي اللي هيكسبك فلوس أول ما حد يفتح التطبيق</p>
-<p id="countDown" style="color:#ff0033;font-weight:900">التخطي بعد 5 ثواني...</p>
-<button id="skipBtn" onclick="closeAppAd()">تخطي الإعلان ✕</button>
-</div>
-<p style="color:#666;font-size:11px;margin-top:10px">يتم تشغيل الإعلان بواسطة Google AdMob</p>
+<div class="topbar">
+<div class="logo">🛒 Tech Factory</div>
+<div style="font-size:12px;color:#22c55e">🔥 خصم اليوم</div>
 </div>
 
-<div class="topbar"><div>مرحبا، ضيف</div><div class="logo">Tech <span>Factory</span></div></div>
-<div class="bannerAd">Banner - AdMob - 320x50 مساحة إعلان</div>
+<div class="bannerAd">Banner Ad - AdMob</div>
+<div id="coursesGrid" class="grid"></div>
+<div class="bannerAd">Banner Ad - AdMob</div>
 
-<div class="grid" id="coursesGrid"></div>
-<div class="bannerAd">Banner سفلي - إعلان تاني</div>
-
-<div class="bottom">
-<button onclick="nav('account')">👤<br>حسابي</button>
-<button onclick="alert('دعم')">💬<br>الدعم</button>
-<button onclick="nav('my')">📘<br>كورساتي</button>
-<button class="active">🏠<br>الرئيسية</button>
-</div>
-
-<div class="modal" id="payBox"><div class="mBox"><h3 id="payTitle"></h3><p>حول على Orange Cash 01272193729</p><input class="input" id="trx" placeholder="رقم العملية"><input class="input" id="buyerName" placeholder="اسمك"><button class="btn" onclick="confirmPay()">فتح الكورس</button><button onclick="payBox.style.display='none'" style="margin-top:10px;width:100%;background:#333;color:#fff;border:0;padding:10px;border-radius:10px">إلغاء</button></div></div>
+<!-- صوت الفيديوهات / الدوسة -->
+<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_2a6d6d8328.mp3?filename=click-button-140881.mp3" preload="auto"></audio>
 
 <script>
-let COURSES=[["Python من الصفر","550ج","99ج","🐍",82],["تطوير مواقع","500ج","149ج","💻",70],["Android","450ج","199ج","📱",56],["Photoshop","300ج","99ج","🎨",67]];
-let myCourses=JSON.parse(localStorage.getItem('myC')||'[]');let currentPay=null;
-function render(){let g=document.getElementById('coursesGrid');g.innerHTML='';COURSES.forEach((c,i)=>{g.innerHTML+=`<div class=card><div class=badge>خصم ${c[4]}%</div><div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:40px;background:linear-gradient(135deg,#0f203f,#1a3a6a)">${c[3]}</div><div class=priceBox><div style="font-size:13px;font-weight:700">${c[0]}</div><div class=old>${c[1]}</div><div class=new>${c[2]}</div><button class=btn onclick="startPay(${i})">▶ فتح بعد الدفع</button></div></div>`;});}
-function startPay(i){currentPay=i;document.getElementById('payTitle').innerText=COURSES[i][0];payBox.style.display='block';}
-function confirmPay(){myCourses.push(currentPay);localStorage.setItem('myC',JSON.stringify(myCourses));payBox.style.display='none';alert('اتفتح!');}
-function nav(){}
-function closeAppAd(){document.getElementById('appOpenAd').style.display='none';}
-// عداد 5 ثواني للتخطي
-let sec=5;let timer=setInterval(()=>{sec--;document.getElementById('countDown').innerText=`التخطي بعد ${sec} ثواني...`;if(sec<=0){clearInterval(timer);document.getElementById('countDown').style.display='none';document.getElementById('skipBtn').style.display='inline-block';}},1000);
+// الـ 17 كورس - ده التغيير الوحيد
+let COURSE = [
+ {n:"Python من الصفر للاحتراف", p:550, a:99, e:"🐍", d:82},
+ {n:"تطوير مواقع Web", p:500, a:149, e:"💻", d:70},
+ {n:"تطبيقات اندرويد", p:450, a:199, e:"📱", d:55},
+ {n:"فوتوشوب Photoshop", p:300, a:99, e:"🎨", d:67},
+ {n:"Java من الصفر", p:500, a:149, e:"☕", d:70},
+ {n:"جرافيك ديزاين", p:400, a:129, e:"🖌️", d:67},
+ {n:"مونتاج فيديو", p:350, a:99, e:"🎬", d:71},
+ {n:"Microsoft Office", p:250, a:79, e:"📊", d:68},
+ {n:"كورس انجليزي كامل", p:600, a:199, e:"🇬🇧", d:66},
+ {n:"اردوينو Arduino", p:500, a:199, e:"🔌", d:60},
+ {n:"روبوتات", p:700, a:299, e:"🤖", d:57},
+ {n:"ذكاء اصطناعي AI", p:800, a:349, e:"🧠", d:56},
+ {n:"تحليل بيانات", p:600, a:249, e:"📈", d:58},
+ {n:"شبكات", p:550, a:199, e:"🌐", d:63},
+ {n:"امن سيبراني", p:900, a:399, e:"🔐", d:55},
+ {n:"تطوير العاب", p:650, a:299, e:"🎮", d:54},
+ {n:"تصميم 3D", p:700, a:349, e:"🧊", d:50}
+];
+
+function playSound(){
+ let s=document.getElementById('clickSound');
+ s.currentTime=0;
+ s.play().catch(()=>{});
+}
+
+function render(){
+ let g=document.getElementById('coursesGrid');
+ g.innerHTML='';
+ COURSE.forEach((c,i)=>{
+   g.innerHTML+=`
+   <div class="card">
+     <div class="badge">-${c.d}%</div>
+     <div class="emoji">${c.e}</div>
+     <div style="font-weight:800;margin-top:6px;font-size:14px">${c.n}</div>
+     <div class="old">${c.p} جنيه</div><div class="new">${c.a} جنيه</div>
+     <button class="btn" onclick="playSound(); openPay(${i})">اشتري الآن</button>
+   </div>`;
+ });
+}
+function openPay(i){ alert('شراء: '+COURSE[i].n+' - '+COURSE[i].a+' جنيه'); }
 render();
 </script>
 </body>
