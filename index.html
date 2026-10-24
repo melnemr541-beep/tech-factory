@@ -3,64 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tech Factory - 17 كورس</title>
+<title>Tech Factory Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#08080f;color:#fff;font-family:Tahoma;text-align:center}
-.top{background:linear-gradient(90deg,#ff6600,#ffcc00);color:#000;padding:10px;font-weight:bold;position:sticky;top:0}
-h1{color:#00e5ff;font-size:32px}h1 span{color:#ff6600}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:12px;max-width:900px;margin:auto}
-.card{background:#12121d;border:1px solid #222;border-radius:14px;padding:12px}
-.price{color:#0f0;font-weight:bold}.btn{background:#00e5ff;color:#000;padding:10px;border-radius:8px;display:block;margin-top:8px;text-decoration:none;font-weight:bold}
-#box{position:fixed;inset:0;background:#000d;display:none;z-index:999;padding:15px}
-.m{background:#111;border:1px solid #00e5ff;border-radius:14px;padding:15px;max-width:450px;margin:30px auto;text-align:right}
+*{box-sizing:border-box;font-family:'Cairo',Tahoma}
+body{margin:0;background:#070a14;color:#fff;padding-bottom:90px}
+.topbar{position:sticky;top:0;z-index:50;background:#0c1226;border-bottom:1px solid #1a254d;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;color:#00e5ff;font-size:22px}.logo span{color:#ff6a00}
+.bannerAd{background:linear-gradient(90deg,#1a1a1a,#222);border:1px dashed #444;margin:10px;padding:10px;text-align:center;border-radius:10px;font-size:12px;color:#888}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
+.card{background:#10182f;border:1px solid #1e2d5a;border-radius:16px;overflow:hidden;position:relative}
+.card .img{height:90px;background:linear-gradient(135deg,#0f203f,#1a3a6a);display:flex;align-items:center;justify-content:center;font-size:40px}
+.badge{position:absolute;top:8px;left:8px;background:#ff0033;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:900}
+.priceBox{padding:8px}.old{text-decoration:line-through;color:#777;font-size:12px}.new{color:#00ff88;font-weight:900;font-size:18px}
+.btn{width:100%;background:linear-gradient(90deg,#00e5ff,#0066ff);color:#000;border:0;padding:10px;border-radius:10px;font-weight:900;margin-top:6px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#0a1128;border-top:1px solid #1e2d5a;display:flex;justify-content:space-around;padding:8px 0;z-index:60}
+.bottom button{background:none;border:0;color:#7a8ab5;font-size:12px}.bottom button.active{color:#00e5ff}
+.modal{position:fixed;inset:0;background:#000d;display:none;z-index:100;overflow:auto;padding:16px}
+.mBox{background:#111a33;border:1px solid #00e5ff;border-radius:16px;padding:16px;max-width:500px;margin:20px auto}
+.input{width:100%;padding:12px;border-radius:10px;border:1px solid #2a3a6a;background:#0a1128;color:#fff;margin:8px 0}
+.fab{position:fixed;bottom:90px;left:16px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;z-index:70;box-shadow:0 4px 12px #000}
+.reward{background:#ffcc00;color:#000;padding:10px;border-radius:10px;text-align:center;margin:10px;font-weight:900}
+.cert{background:#fff;color:#000;padding:20px;border-radius:12px;text-align:center;border:4px double #00e5ff}
 </style>
 </head>
 <body>
-<div class="top">🎁 كود TECH100 + Orange Cash 01272193729 🎁</div>
-<h1>Tech <span>Factory</span></h1>
-<p>17 كورس - دوس على الكورس تشوف فيديوهاته</p>
-<div class="grid" id="g"></div>
-<div id="box"><div class="m">
-<button onclick="box.style.display='none'" style="background:#f33;color:#fff;border:0;padding:8px 15px;border-radius:8px">X</button>
-<h2 id="t" style="color:#00e5ff"></h2>
-<p id="p" style="color:#0f0"></p>
-<div id="v"></div>
-<a id="w" href="#" target="_blank" style="display:block;background:#25D366;color:#fff;padding:12px;border-radius:10px;text-align:center;text-decoration:none;margin-top:10px;font-weight:bold">اشتراك واتساب</a>
+<div class="topbar"><div class="logo">Tech <span>Factory</span></div><div id="userName" style="font-size:12px">مرحبا، ضيف</div></div>
+<div class="bannerAd">📢 مساحة إعلان Banner - AdMob - 320x50</div>
+<div class="reward" onclick="watchReward()">🎁 شاهد إعلان مكافأة واحصل على خصم 20% - تخطي بعد 5 ثواني</div>
+
+<div id="page-home"><div class="grid" id="coursesGrid"></div></div>
+
+<div id="page-my" style="display:none;padding:16px">
+<h3>📚 كورساتي</h3><div id="myCourses"></div>
+</div>
+
+<div id="page-account" style="display:none;padding:16px">
+<h3>👤 حسابي - زي الصورة اللي بعتها</h3>
+<div class="mBox" style="margin:0">
+<p>الاسم: <span id="accName">-</span></p>
+<p>الإيميل / الهاتف: <span id="accMail">-</span></p>
+<p>الرصيد: 0 جنيه</p>
+<p>الكورسات المشتراة: <span id="accCount">0</span></p>
+<input class="input" id="couponInput" placeholder="ادخل كود خصم من اللايف مثلا LIVE100">
+<button class="btn" onclick="applyCoupon()">تفعيل الكود</button>
+<p style="font-size:12px;color:#888;margin-top:12px">التسجيل بجيمل جوجل او رقم تلفونه وكلمة سر</p>
+<button class="btn" onclick="login()" style="background:#fff">🔐 تسجيل دخول Gmail / رقم الهاتف</button>
+<div style="margin-top:10px;font-size:13px">🔔 الإشعارات: مفعلة<br>🌙 الوضع الليلي: مفعل<br>⚙️ الإعدادات</div>
+</div>
+<div class="bannerAd">إعلان سفلي - Banner</div>
+</div>
+
+<div class="bottom">
+<button id="b-home" class="active" onclick="nav('home')">🏠<br>الرئيسية</button>
+<button onclick="nav('my')">📘<br>كورساتي</button>
+<button onclick="document.getElementById('supportBox').style.display='block'">💬<br>الدعم</button>
+<button id="b-account" onclick="nav('account')">👤<br>حسابي</button>
+</div>
+<div class="fab" onclick="document.getElementById('supportBox').style.display='block'">💬</div>
+
+<div class="modal" id="payBox"><div class="mBox">
+<button onclick="payBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X</button>
+<h3 id="payTitle"></h3><p id="payPrice" style="color:#0f0;font-weight:900"></p>
+<p style="font-size:13px">1- حول على Orange Cash: <b style="color:#ff6a00">01272193729</b></p>
+<p style="font-size:13px">2- بعد التحويل اكتب آخر 4 أرقام وهيفتح الكورس لوحده ليك انت بس:</p>
+<input class="input" id="trx" placeholder="مثال: 1234">
+<input class="input" id="buyerName" placeholder="اسمك عشان الشهادة">
+<button class="btn" onclick="confirmPay()">✅ تأكيد الدفع وفتح الكورس الآن</button>
 </div></div>
+
+<div class="modal" id="playerBox"><div class="mBox" style="max-width:700px">
+<button onclick="playerBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X إغلاق</button>
+<h3 id="plTitle"></h3><div id="plVideos"></div><div id="certArea"></div>
+</div></div>
+
+<div class="modal" id="supportBox"><div class="mBox">
+<button onclick="supportBox.style.display='none'" style="float:left;background:#f33;color:#fff;border:0;padding:6px 12px;border-radius:8px">X</button>
+<h3>💬 خدمة العملاء - جوه التطبيق</h3>
+<div id="chat" style="height:200px;overflow:auto;background:#070a14;border-radius:10px;padding:10px;margin:10px 0;font-size:13px">
+<div>🤖 أهلا بيك! ازاي اقدر اساعدك؟</div>
+</div>
+<input class="input" id="msg" placeholder="اكتب رسالتك...">
+<button class="btn" onclick="sendMsg()">إرسال</button>
+<a href="https://wa.me/201272193729" target="_blank" style="display:block;text-align:center;margin-top:10px;color:#25D366">واتساب 01272193729</a>
+</div></div>
+
 <script>
-let C=[
-["Python","250ج","مقدمة AI","متغيرات","مشروع"],
-["Java","250ج","مقدمة","OOP","مشروع"],
-["Web Dev","300ج","HTML","JS","موقع"],
-["Android","300ج","مقدمة","Flutter","نشر"],
-["Photoshop","150ج","ادوات","AI","سوشيال"],
-["Graphic","200ج","اساسيات","Canva","بورتفوليو"],
-["Video Edit","200ج","CapCut","Premiere","AI"],
-["Office","100ج","Word","Excel","PowerPoint"],
-["English","150ج","Basics","Conversation","Business"],
-["Arduino","250ج","مقدمة","Sensors","Smart Home"],
-["Robotics","300ج","مقدمة","محاكاة","روبوت"],
-["AI Basics","300ج","ما هو AI","ادوات","صناعة كورس"],
-["Data","350ج","Excel","Python","تحليل"],
-["Networking","200ج","اساسيات","CCNA","عملي"],
-["Cyber Security","350ج","حماية","ادوات","اختراق"],
-["Game Dev","400ج","Unity","شخصيات","لعبة"],
-["3D Design","300ج","Blender","3D AI","مشروع"]
+let COURSES=[
+["Python من الصفر","550ج","99ج","🐍",550,99],["تطوير مواقع","500ج","149ج","💻",500,149],["Android Studio","450ج","199ج","📱",450,199],["Photoshop","300ج","99ج","🎨",300,99],["المونتاج","350ج","129ج","🎬",350,129],["Office","250ج","99ج","📊",250,99],["اللغة الإنجليزية","400ج","149ج","🇬🇧",400,149],["Arduino","450ج","199ج","🤖",450,199],["Robotics","550ج","249ج","🦾",550,249],["AI Basics","550ج","199ج","🧠",550,199],["Cyber Security","550ج","249ج","🔐",550,249],["Game Dev","550ج","299ج","🎮",550,299],["3D Design","500ج","199ج","🧊",500,199],["Networking","400ج","149ج","🌐",400,149],["Java","500ج","149ج","☕",500,149],["Data Science","550ج","249ج","📈",550,249],["Graphic Design","350ج","129ج","🖌️",350,129]
 ];
-let g=document.getElementById('g');
-C.forEach((c,i)=>{
-g.innerHTML+=`<div class=card><b>${i+1}- ${c[0]}</b><div class=price>${c[1]}</div><a class=btn href="#" onclick="openM(${i});return false">شاهد الفيديوهات</a></div>`
+let myCourses=JSON.parse(localStorage.getItem('myC')||'[]');
+let currentPay=null;
+let user={name:localStorage.getItem('uName')||'',mail:localStorage.getItem('uMail')||''};
+function render(){
+let g=document.getElementById('coursesGrid'); g.innerHTML='';
+COURSES.forEach((c,i)=>{
+let locked=myCourses.includes(i)?'✅ مفتوح':'▶ فتح بعد الدفع';
+g.innerHTML+=`<div class=card><div class=badge>خصم ${Math.round((1-c[5]/c[4])*100)}%</div><div class=img>${c[3]}</div><div class=priceBox><div style="font-size:13px;font-weight:700">${c[0]}</div><div class=old>${c[1]}</div><div class=new>${c[2]}</div><button class=btn onclick="startPay(${i})">${locked}</button></div></div>`;
 });
-function openM(i){
-let c=C[i];
-document.getElementById('t').innerText=c[0];
-document.getElementById('p').innerText=c[1];
-let h="";
-for(let k=2;k<c.length;k++){h+=`<div style="background:#1a1a1a;padding:10px;border-radius:8px;margin:6px 0">${k-1}- ${c[k]}</div>`}
-document.getElementById('v').innerHTML=h;
-document.getElementById('w').href=`https://wa.me/201272193729?text=عايز كورس ${c[0]}`;
-document.getElementById('box').style.display='block';
+document.getElementById('myCourses').innerHTML=myCourses.length?myCourses.map(i=>`<div class=card style="margin:8px 0;padding:10px"><b>${COURSES[i][0]}</b><button class=btn onclick="openPlayer(${i})">فتح الكورس جوه</button></div>`).join(''):'<p style=color:#888>لسه مشترتش كورسات</p>';
+document.getElementById('accName').innerText=user.name||'غير مسجل';
+document.getElementById('accMail').innerText=user.mail||'-';
+document.getElementById('accCount').innerText=myCourses.length;
+document.getElementById('userName').innerText=user.name?('مرحبا، '+user.name):'مرحبا، ضيف';
 }
+function nav(p){
+document.getElementById('page-home').style.display=p=='home'?'block':'none';
+document.getElementById('page-my').style.display=p=='my'?'block':'none';
+document.getElementById('page-account').style.display=p=='account'?'block':'none';
+document.getElementById('b-home').className=p=='home'?'active':'';
+document.getElementById('b-account').className=p=='account'?'active':'';
+}
+function startPay(i){currentPay=i;document.getElementById('payTitle').innerText=COURSES[i][0];document.getElementById('payPrice').innerText='المطلوب: '+COURSES[i][2]+' بدل '+COURSES[i][1];document.getElementById('payBox').style.display='block';}
+function confirmPay(){
+let trx=document.getElementById('trx').value.trim();
+let name=document.getElementById('buyerName').value.trim();
+if(!trx||!name){alert('اكتب اسمك ورقم العملية');return}
+if(name){user.name=name;localStorage.setItem('uName',name)}
+if(!myCourses.includes(currentPay)){myCourses.push(currentPay);localStorage.setItem('myC',JSON.stringify(myCourses))}
+document.getElementById('payBox').style.display='none';render();openPlayer(currentPay);
+}
+function openPlayer(i){
+if(!myCourses.includes(i)){startPay(i);return}
+document.getElementById('plTitle').innerText=COURSES[i][0];
+let vids='';
+for(let k=1;k<=5;k++){vids+=`<div style="background:#000;border-radius:10px;margin:10px 0;overflow:hidden"><div style="padding:40px;text-align:center;background:linear-gradient(135deg,#0f203f,#1a3a6a)">▶ فيديو ${k} - ${COURSES[i][0]} - يشتغل جوه</div><div style="padding:6px;font-size:12px">الدرس ${k} - فيديو حقيقي تحط لينك يوتيوب بتاعك هنا</div></div>`;}
+document.getElementById('plVideos').innerHTML=vids;
+document.getElementById('certArea').innerHTML=`<button class=btn onclick="makeCert('${COURSES[i][0]}')">🎓 خلصت؟ خد شهادتك</button><div id=certBox style="margin-top:10px"></div>`;
+document.getElementById('playerBox').style.display='block';
+}
+function makeCert(course){
+let name=user.name||'المتدرب';
+document.getElementById('certBox').innerHTML=`<div class=cert><h2>شهادة إتمام</h2><p>تشهد منصة Tech Factory بأن</p><h3 style="color:#0066ff">${name}</h3><p>أتم كورس</p><h3>${course}</h3><p>${new Date().toLocaleDateString('ar-EG')}</p></div>`;
+}
+function login(){
+let n=prompt('اسمك:');let m=prompt('ايميل جوجل او رقم تليفون:');
+if(n){user.name=n;localStorage.setItem('uName',n)}
+if(m){user.mail=m;localStorage.setItem('uMail',m)}
+render();
+}
+function applyCoupon(){let c=document.getElementById('couponInput').value.toUpperCase();if(['LIVE100','TECH100','RAMADAN50'].includes(c))alert('✅ كود صحيح خصم 20%');else alert('❌ جرب LIVE100');}
+function sendMsg(){let t=document.getElementById('msg').value;if(!t)return;document.getElementById('chat').innerHTML+=`<div style="margin:6px 0;color:#00e5ff">انت: ${t}</div><div>🤖 هنرد خلال دقايق</div>`;document.getElementById('msg').value='';}
+function watchReward(){alert('🎬 إعلان مكافأة - تخطي بعد 5 ث - خصم 20% (AdMob Rewarded)');}
+render();
 </script>
 </body>
-  </html>
+</html>
